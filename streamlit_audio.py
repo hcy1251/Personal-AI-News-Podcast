@@ -34,7 +34,7 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 system_message = '''
                 You are a very talented editor, skilled at consolidating 
                 fragmented information and introductions into a cohesive script, without missing any details.
-                Compile the news article based on the information in 【】.  
+                Compile the news article based on the information in [].  
                 '''
 
 system_message_2 = '''
@@ -177,10 +177,10 @@ def get_transcript(video_id):
 
 def extract_data_from_url(url, class_name):
     """
-    从指定的URL中提取特定类名的<a>标签的href属性和文本内容。
+    从指定的 URL 中提取特定类名的<a>标签的 href 属性和文本内容。
 
-    参数:
-    - url (str): 要提取数据的网页URL。
+    参数：
+    - url (str): 要提取数据的网页 URL。
     - class_name (str): 要查找的<a>标签的类名。
 
     """
@@ -236,7 +236,7 @@ def get_h1_from_url(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
         
-        # 根据class查找<h1>标签
+        # 根据 class 查找<h1>标签
         h1_tag = soup.find("h1", class_="f-display-2")
         if h1_tag:
             return h1_tag.text
@@ -446,7 +446,7 @@ def input_page(st, **state):
     # Add the GitHub, Twitter and discord icons with hyperlinks
     discord = "https://discord.com/invite/aKkmnn4uWy"
 
-    image_path = 'MS_Startups_FH_lockup_hrz_alt_1C_Blk.png'
+    image_path = 'MS_Startups_FH_lockup_hrz_alt_OnDrk_RGB.png'
     # Convert the resized image to a base64 string
     st.markdown(
         f"""
@@ -583,7 +583,7 @@ def input_page(st, **state):
                 You should be able to recognize and exaggerate humorous elements of each article along with jokes and deliver them in a way 
                 that will make the audience laugh."""
 
-    image_path = 'MS_Startups_FH_lockup_hrz_alt_1C_Blk.png'
+    image_path = 'MS_Startups_FH_lockup_hrz_alt_OnDrk_RGB.png'
     # Convert the resized image to a base64 string
     image_base64 = get_resized_image_as_base64_string(image_path, factor=0.08)
     st.markdown(f"""
@@ -714,7 +714,7 @@ def compute_page(st, **state):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     
-    # 根据提供的HTML片段，定位到文章的标题和链接
+    # 根据提供的 HTML 片段，定位到文章的标题和链接
     article = soup.select_one('h3.post-title a')
     apple_link = 'https://machinelearning.apple.com'+ article['href']
     
@@ -780,7 +780,7 @@ def compute_page(st, **state):
                     {'role':'system',
                     'content': system_message + "keep it equal to {} words.".format(st.session_state.audio_length) + st.session_state.tone},
                     {'role':'user',
-                    'content': f"【{query}】"},]
+                    'content': f"[{query}]"},]
     response = get_completion_from_messages(messages)
     print(response)
     my_bar.progress(90, text="Generating Podcast...")
@@ -795,7 +795,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_2},
                         {'role':'user',
-                        'content': f"【{query}】"},]
+                        'content': f"[{query}]"},]
         summary = get_completion_from_messages(messages)
     
     else:
@@ -805,7 +805,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{before}】"},]
+                        'content': f"[{before}]"},]
         after = get_completion_from_messages(messages)
         # 构建 edge-tts 命令
         command = f'edge-tts --voice zh-CN-XiaoyiNeural --text "{after}" --write-media hello2.mp3'
@@ -906,7 +906,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{title}】"},]
+                        'content': f"[{title}]"},]
             
             title = get_completion_from_messages(messages)
             news_summary = google_news['summary'][i]
@@ -914,7 +914,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
             news_summary = get_completion_from_messages(messages)
  
             st.markdown(f'<a href="{google_news["url"][i]}" style="color: #2859C0; text-decoration: none; \
@@ -926,7 +926,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         h_title = get_completion_from_messages(messages)
         st.markdown(f'<a href="{data_mrf_link}" style="color:  #2859C0; text-decoration: none; \
             font-size: 20px;font-weight: bold;">{h_title}</a>\
@@ -936,7 +936,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         h_content = get_completion_from_messages(messages)
         st.markdown(h_content)
 
@@ -946,7 +946,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         L_title = get_completion_from_messages(messages)
         st.markdown(f'<a href="{youtube_link}" style="color:  #2859C0; text-decoration: none; \
             font-size: 20px;font-weight: bold;">{L_title}</a>\
@@ -956,7 +956,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         lexi_boardcast = get_completion_from_messages(messages)
         st.markdown(lexi_boardcast)
 
@@ -965,7 +965,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         Nvidia_title = get_completion_from_messages(messages)
         st.markdown(f'<a href="{next_link}" style="color:  #2859C0; text-decoration: none; \
             font-size: 20px;font-weight: bold;">{Nvidia_title}</a>\
@@ -975,7 +975,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         n_content = get_completion_from_messages(messages)
         st.markdown(n_content)
 
@@ -984,7 +984,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         machine_title = get_completion_from_messages(messages)
         st.markdown(f'<a href="{machine_link}" style="color:  #2859C0; text-decoration: none; \
             font-size: 20px;font-weight: bold;">{machine_title}</a>\
@@ -995,7 +995,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{news_summary}】"},]
+                        'content': f"[{news_summary}]"},]
         machine_learning_boardcast = get_completion_from_messages(messages)
         st.markdown(machine_learning_boardcast)
 
@@ -1013,7 +1013,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{openai_title}】"},]
+                        'content': f"[{openai_title}]"},]
         openai_title = get_completion_from_messages(messages)
 
         st.markdown(f'<a href= {openai_blog_url} style="color:  #2859C0; text-decoration: none; \
@@ -1026,7 +1026,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{bair_blog}】"},]
+                        'content': f"[{bair_blog}]"},]
         bair_blog = get_completion_from_messages(messages)
 
         messages =  [
@@ -1045,7 +1045,7 @@ def compute_page(st, **state):
                         {'role':'system',
                         'content': system_message_3},
                         {'role':'user',
-                        'content': f"【{mit_blog}】"},]
+                        'content': f"[{mit_blog}]"},]
         mit_blog = get_completion_from_messages(messages)
 
         messages =  [
@@ -1108,7 +1108,7 @@ def page_two():
 
 
 def main():
-    # 初始化session状态
+    # 初始化 session 状态
     if "page" not in st.session_state:
         st.session_state.page = "one"
 
@@ -1129,7 +1129,7 @@ def main():
         st.session_state.tone = ''
 
 
-    # 根据session状态来渲染页面
+    # 根据 session 状态来渲染页面
     if st.session_state.page == "one":
         page_one()
     elif st.session_state.page == "two":
