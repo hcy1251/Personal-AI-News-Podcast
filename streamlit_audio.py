@@ -446,7 +446,7 @@ def input_page(st, **state):
     # Add the GitHub, Twitter and discord icons with hyperlinks
     discord = "https://discord.com/invite/aKkmnn4uWy"
 
-    image_path = 'MS_Startups_FH_lockup_hrz_alt_OnDrk_RGB.png'
+    image_path = './images/MS_Startups_FH_lockup_hrz_alt_OnDrk_RGB.png'
     # Convert the resized image to a base64 string
     st.markdown(
         f"""
@@ -583,7 +583,7 @@ def input_page(st, **state):
                 You should be able to recognize and exaggerate humorous elements of each article along with jokes and deliver them in a way 
                 that will make the audience laugh."""
 
-    image_path = 'MS_Startups_FH_lockup_hrz_alt_OnDrk_RGB.png'
+    image_path = './images/MS_Startups_FH_lockup_hrz_alt_OnDrk_RGB.png'
     # Convert the resized image to a base64 string
     image_base64 = get_resized_image_as_base64_string(image_path, factor=0.08)
     st.markdown(f"""
